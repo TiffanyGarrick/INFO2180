@@ -1,0 +1,112 @@
+body {
+	display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu main main main right right'
+    'menu footer footer footer footer footer';
+  	grid-gap: 1px;
+}
+
+aside { 
+	grid-area: menu; 
+	padding-right: 5px;
+	background: #f2f2f2;
+}
+
+header {
+	grid-area: header;
+	display: flex;
+	background: black;
+}
+
+.headertitle h4{
+  color: white;
+  font-family: "Arial";
+}
+
+main{
+  grid-area: main;
+  padding-left: 20px;
+}
+
+input[type=text], input[type=email], input[type=password]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button{
+    width: 50%;
+    background-color: #1500ff;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #1300e6;
+}
+
+label{
+  font-weight: bold;
+}
+
+a:link {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover{
+  color: blue;
+  text-decoration: none;
+}
+
+a:visited{
+  color: black;
+  text-decoration: none;
+}
+
+.hometab{
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.addusertab{
+  padding-top: 5px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.newissue{
+  padding-top: 5px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.logout{
+  padding-top: 5px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.container-login{
+  padding: 20px;
+  border: 2px solid black;
+  margin-top: 20px;
+}
+
+.login{
+  padding: 20px;
+}
+
+.main-login{
+  padding-top: 75px;
+}
