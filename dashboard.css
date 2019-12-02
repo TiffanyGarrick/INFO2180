@@ -1,0 +1,122 @@
+.create {
+  float: right;
+  margin-top: 25px;
+  margin-left: 50px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #04cf69;
+  padding: 10px;
+  
+}
+
+
+
+.title{
+  float: left;
+}
+
+label{
+  font-weight: bold;
+}
+
+body {
+	display: grid;
+  grid-template-areas:
+    'header header header header header header'
+    'menu main main main right right'
+    'menu footer footer footer footer footer';
+  	grid-gap: 1px;
+}
+
+aside { 
+	grid-area: menu; 
+	padding-right: 5px;
+	background: #f2f2f2;
+}
+
+header {
+	grid-area: header;
+	display: flex;
+	background: black;
+}
+
+.headertitle h4{
+  color: white;
+  font-family: "Arial";
+}
+
+main{
+  grid-area: main;
+  padding-left: 20px;
+}
+
+a:link {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover{
+  color: white;
+  text-decoration: none;
+}
+
+a:visited{
+  color: black;
+  text-decoration: none;
+}
+
+a.createlink{
+  color: white;
+  font-weight: 300;
+}
+
+.hometab{
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.addusertab{
+  padding-top: 5px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.newissue{
+  padding-top: 5px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.logout{
+  padding-top: 5px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.btn{
+    width: 20%;
+    background-color: white;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn:hover{
+  background-color: #ddd;
+}
+
+.btn.active{
+  background-color: #1500ff;
+  color: white;
+}
+
+#myBtnContainer{
+  position: relative;
+  left: 70px;
+  bottom: 30px;
+  margin-left: 5px;
+}
