@@ -1,9 +1,73 @@
+<?php include ('dashboard.php');?>
 <html>
     <head>
         <title>BugMe Tracker - Home</title>
         <link rel="stylesheet" href="dashboard.css" media="screen">
+        <style type="text/css">
+            table{
+                border-collapse: collapse;
+                width: 100%;
+                color: black;
+                font-family: "Times New Roman" serif;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:hover{
+                background-color: #ddd;
+            }
+
+            th{
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: center;
+                background-color: #f2f2f2;
+                color: black;
+            }
+
+            td{
+                padding: 10px;
+                text-align: center;
+            }
+
+            #titlehead{
+                text-align: left;
+            }
+
+            #open{
+                background-color: #04cf69;
+                color: white;
+                border-radius: 5px;
+                text-align: center;
+                font-weight: bolder;
+            }
+
+            #progress{
+                background-color: #ffc917;
+                color: white;
+                border-radius: 5px;
+                text-align: center;
+                font-weight: bolder;
+            }
+
+            #closed{
+                background-color: #ff7f17;
+                color: white;
+                border-radius: 5px;
+                text-align: center;
+                font-weight: bolder;
+            }
+
+            #issuetitle{
+                color: #1c7eff;
+                text-align: left;
+            }
+
+
+        </style>
         <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-        <script type="text/javascript" src="filterbuttons.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+        <script src="no-refresh.js" charset="utf-8"></script>
     </head>
     <body>
         <header>
@@ -14,16 +78,16 @@
         
         <aside>
             <div class="hometab">
-                <a href="dashboard.html"><i class="fas fa-home" style="padding-right: 15px; padding-left: 10px;"></i>Home</a>
+                <a href="dashboardpage.php"><i class="fas fa-home" style="padding-right: 15px; padding-left: 10px;"></i>Home</a>
             </div>
             <div class="addusertab">
-                <a href="newuserpage.html"><i class="fas fa-user-plus" style="padding-right: 10px; padding-left: 10px;"></i>Add User</a>
+                <a href="newuserpage.php"><i class="fas fa-user-plus" style="padding-right: 10px; padding-left: 10px;"></i>Add User</a>
             </div>
             <div class="newissue">
-                <a href="newissue.html"><i class="fas fa-plus-circle" style="padding-right: 15px; padding-left: 10px;"></i>New Issue</a>
+                <a href="createissue.php"><i class="fas fa-plus-circle" style="padding-right: 15px; padding-left: 10px;"></i>New Issue</a>
             </div>
             <div class="logout">
-                <a href="logout.html"><i class="fas fa-power-off" style="padding-right: 15px; padding-left: 10px;"></i>Log Out</a>
+                <a href="logout.php"><i class="fas fa-power-off" style="padding-right: 15px; padding-left: 10px;"></i>Log Out</a>
             </div>
         </aside>
         
@@ -32,47 +96,51 @@
                 <h1>Issues</h1>
             </div>
             <div class="create">
-                <a class="createlink" href="createnewissue.html">Create New Issue</a>
+                <a class="createlink" href="createissue.php">Create New Issue</a>
             </div>
             
             </br></br></br></br></br></br>
             
             <label for="btn">Filter by:</label>
             <div id="myBtnContainer">
-                <button class="btn active" onclick="filterSelection('all')">ALL</button>
-                <button class="btn" onclick="filterSelection('open')">Open</button>
-                <button class="btn" onclick="filterSelection('mytickets')">My Tickets</button>
+                <button class="btn active" id="allbtn" type="button">ALL</button>
+                <button class="btn" id="openbtn" type="button">Open</button>
+                <button class="btn" id="ticketsbtn" type="button">My Tickets</button>
             </div>
             
-            </br></br></br></br></br></br>
             
-            <div class="table">
-                <table>
+            <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
+                            <th id="titlehead">Title</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Assigned To</th>
+                            <th>Created</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($issues as $issue): ?>
-                        <tr>
-                            <td><?= $issue['id']; ?></td>
-                            <td><?= $issue['title']; ?></td>
-                            <td><?= $issue['description']; ?></td>
-                            <td><?= $issue['type_']; ?></td>
-                            <td><?= $issue['priority']; ?></td>
-                            <td><?= $issue['status']; ?></td>
-                            <td><?= $issue['assigned_to']; ?></td>
-                            <td><?= $issue['created_by']; ?></td>
-                            <td><?= $issue['created']; ?></td>
-                            <td><?= $issue['updated']; ?></td>
-                        </tr>
-                        <?php endforeach; ?>
+                        <?php foreach ($issues as $issue){
+                            echo '<tr>
+                                    <td id="issuetitle">#'.$issue['id'].' '.$issue['title'].'</td>
+                                    <td>'.$issue['type'].'</td>';
+                                    
+
+                            if ($issue['status'] == "Open"){
+                                echo '<td id="open">'.$issue['status'].'</td>';
+                            } elseif ($issue['status'] == "In Progress"){
+                                echo '<td id="progress">'.$issue['status'].'</td>';
+                            }elseif ($issue['status'] == "Closed") {
+                                echo '<td id="closed">'.$issue['status'].'</td>';
+                            }else{
+                                echo '<td>'.$issue['status'].'</td>';
+                            }
+                                   echo '<td>'.$issue['assigned_to'].'</td>
+                                    <td>'.$issue['created'].'</td>
+                                </tr>';
+                        } ?>
                     </tbody>
-                </table>
-            </div>
+            </table>
             
         </main>
     </body>

@@ -3,7 +3,7 @@ session_start();
 $_SESSION['message']='';
 
 //connecting to mysql database
-$mysqli = new mysqli('localhost', 'info2180_user', '@info2180Project', 'info2180Project');
+$mysqli = new mysqli('localhost', 'root', '', 'bugme');
 //ensure form is being submitted
 if($_SERVER['REQUEST_METHOD']=='POST'){
     //setting post variables
@@ -32,9 +32,14 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     }
 }
 ?>
-
+<htmL>
+<head>
+<title>BugMe - Create Issue</title>
 <link rel="stylesheet" href="createissue.css" media="screen">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<script src="no-refresh.js" charset="utf-8"></script>
+</head>
 <body>
     <header>
         <div class="headertitle">
@@ -43,16 +48,16 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     </header>
     <aside>
         <div class="hometab">
-            <a href="dashboard.html"><i class="fas fa-home" style="padding-right: 15px; padding-left: 10px;"></i>Home</a>
+            <a href="dashboardpage.php"><i class="fas fa-home" style="padding-right: 15px; padding-left: 10px;"></i>Home</a>
         </div>
         <div class="addusertab">
-            <a href="creatingnewuser.php"><i class="fas fa-user-plus" style="padding-right: 10px; padding-left: 10px;"></i>Add User</a>
+            <a href="newuserpage.php"><i class="fas fa-user-plus" style="padding-right: 10px; padding-left: 10px;"></i>Add User</a>
         </div>
         <div class="newissue">
-            <a href="createissue.html"><i class="fas fa-plus-circle" style="padding-right: 15px; padding-left: 10px;"></i>New Issue</a>
+            <a href="createissue.php"><i class="fas fa-plus-circle" style="padding-right: 15px; padding-left: 10px;"></i>New Issue</a>
         </div>
         <div class="logout">
-            <a href="loginpage.html"><i class="fas fa-power-off" style="padding-right: 15px; padding-left: 10px;"></i>Log Out</a>
+            <a href="logout.php"><i class="fas fa-power-off" style="padding-right: 15px; padding-left: 10px;"></i>Log Out</a>
         </div>
     </aside>
     <main>
@@ -124,3 +129,4 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         </div>
     </main>
 </body>
+</htmL>

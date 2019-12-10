@@ -2,8 +2,8 @@
 ob_start();
 session_start();
 $host = "localhost";
-$username = "jholloway"; //for testing purpose
-$password = "INFO2180final!"; //for testing purpose
+$username = "root"; //for testing purpose
+$password = ""; //for testing purpose
 $database = "bugme";
 $message = "";
 try{
@@ -11,26 +11,39 @@ try{
 	$connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch(PDOException $error){
-	$message = $error->getMessage();
+	echo("Can't open the database.");
 }
 if (isset($_POST["loginbtn"])){
 		if(empty($_POST["email"]) || empty($_POST["password"])){
-			$message = '<label>All fields are required</label>';
+			echo '<script type="text/JavaScript"> alert("All fields are required");</script>';
 		}
 		else{
 			$email = $_POST['email'];
 			$pword = $_POST['password'];
-			$query = "SELECT email, password FROM users WHERE email = :email AND password = :pword";
-			$stmt = $database->prepare($query);
-    		$stmt->bindParam('email', $email, PDO::PARAM_STR);
-    		$stmt->bindValue('password', $password, PDO::PARAM_STR);
-    		$stmt->execute();
-    		$count = $stmt->rowCount();
-    		$row   = $stmt->fetch(PDO::FETCH_ASSOC);
-			if($count == 1 && !empty($row)) {
+			$hash = password_hash($password, PASSWORD_BCRYPT);
+		print_r($hash);
+			$query = "SELECT * FROM users WHERE email = ?";
+			$statement = $connect->prepare($query);
+			$statement->execute([$_POST['email']]);
+			$user = $statement->fetchAll(PDO::FETCH_OBJ);
+			//print_r($user[0]->password);
+			echo '\n\n\n';
+			print_r($_POST['password']);
+			if(isset($user[0]))
+			{
+				if(md5($_POST['password']) == $user[0]->password){
+					$_SESSION["email"] = $_POST["email"];
+					header('location:dashboardpage.php');
+					exit;
+				  }
+				  else{
+					  echo '<script type="text/JavaScript"> alert("Wrong password");</script>';
+				  }
+			}
+			/* if(!empty($row)){
 				if(password_verify($_POST['password'], $row['password'])){
 					$_SESSION["email"] = $_POST["email"];
-					header('location:/dashboardpage.php');
+					header('location:dashboardpage.php');
 					exit;
 				}
 				else{
@@ -38,7 +51,7 @@ if (isset($_POST["loginbtn"])){
 				}
 			}else{
 				$message = '<label>Wrong Data</label>';
-			}
+			} */
 		}
 	}
 ob_end_flush();
